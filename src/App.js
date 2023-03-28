@@ -1,25 +1,42 @@
 import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <LoadCountries></LoadCountries>
+
     </div>
   );
+}
+// component declear 
+function LoadCountries() {
+  // 1: state declear
+  const [countries, setCountries] = useState([])
+  // 2: useEffect
+
+  useEffect(() => {
+    // 3: Writing fetch() inside useEffect() & setting loaded data
+
+    fetch('https://restcountries.com/v3.1/all')
+      .then(res => res.json())
+      .then(data => setCountries(data))
+
+  }, [])
+  return (
+    <div>
+      <h1>Visiting Every countries of the worlds</h1>
+      <h2>Available Countries :{countries.length}</h2>
+      {/* for dynamic */}
+      {/* Display countries in a simple way */}
+
+      {
+
+      }
+    </div>
+  )
 }
 
 export default App;
